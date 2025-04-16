@@ -21,6 +21,7 @@ class DataTransformation:
         """
 
         # Convert data to appropriate dtypes
+        df.drop(columns=['user_id'], axis=1, inplace=True)
         numerical_columns = ['age', 'days_since_last_login', 'avg_time_spent',
                             'avg_transaction_value', 'avg_frequency_login_days', 'points_in_wallet', 'churn_risk_score']
         df[numerical_columns] = df[numerical_columns].apply(pd.to_numeric, errors='coerce')
