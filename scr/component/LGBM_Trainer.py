@@ -66,4 +66,5 @@ class LGBM_Trainer:
         best_model.fit(X_train_transformed, y_train)
 
         self.model = best_model
-        return best_model
+        return best_model, metrics
+    
