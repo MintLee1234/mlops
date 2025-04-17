@@ -80,7 +80,6 @@ class DataTransformation:
         }
 
         df = df.rename(columns=rename_mapping)
-        print(df.info())
 
         return df
     def get_transformer_obj(self, X_train, y_train):
@@ -135,19 +134,17 @@ class DataTransformation:
     def train_val_test_splitting(self):
             X = self.df.drop(columns=["churn_risk_score"])
             y = self.df["churn_risk_score"]
-            X_train, X_rem, y_train, y_rem = train_test_split(X, y, test_size=0.3, random_state=42)  # 70% train, 30% remaining
-            X_val, X_test, y_val, y_test = train_test_split(X_rem, y_rem, test_size=0.5, random_state=42) # Split remaining 30% 
+            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)  # 70% train, 30% remaining
 
 
-            return X_train, X_val, X_test, y_train, y_val, y_test
+            return X_train, X_test, y_train, y_test
 
-    def initiate_data_transformation(self, X_train, X_val, X_test, y_train, y_val, y_test):
+    def initiate_data_transformation(self, X_train, X_test, y_train, y_test):
 
             preprocessor_obj = self.get_transformer_obj(X_train, y_train)
 
             X_train_transformed = preprocessor_obj.transform(X_train)
-            X_val_transformed = preprocessor_obj.transform(X_val)
             X_test_transformed = preprocessor_obj.transform(X_test)
 
-            return X_train_transformed, X_val_transformed, X_test_transformed, y_train, y_val, y_test
+            return X_train_transformed, X_test_transformed, y_train, y_test
 
