@@ -1,6 +1,0 @@
-artifact_location: file:///home/minhle/mlops/scr/pipeline/mlruns/423720665409469487
-creation_time: 1745040561046
-experiment_id: '423720665409469487'
-last_update_time: 1745040561046
-lifecycle_stage: active
-name: LGBM_Optuna
