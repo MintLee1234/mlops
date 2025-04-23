@@ -15,6 +15,7 @@ from category_encoders import TargetEncoder
 class DataTransformation:
     def __init__(self, df):
         self.df = self.transform_data(df)
+        self.X_train, self.X_test, self.y_train, self.y_test = self.train_val_test_splitting()
     def transform_data(self, df):
         """
         Performs data transformations on the input DataFrame.
@@ -134,22 +135,17 @@ class DataTransformation:
     def train_val_test_splitting(self):
             X = self.df.drop(columns=["churn_risk_score"])
             y = self.df["churn_risk_score"]
-            X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)  
+            self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.3, random_state=42)  
+            return self.X_train, self.X_test, self.y_train, self.y_test
 
-            return X_train, X_test, y_train, y_test
-    
+    def initiate_data_transformation(self):
 
-    def initiate_data_transformation(self, X_train, X_test, y_train, y_test):
+            preprocessor_obj = self.get_transformer_obj(self.X_train, self.y_train)
 
-            preprocessor_obj = self.get_transformer_obj(X_train, y_train)
+            self.X_train_transformed = preprocessor_obj.transform(self.X_train)
+            self.X_test_transformed = preprocessor_obj.transform(self.X_test)
 
-            X_train_transformed = preprocessor_obj.transform(X_train)
-            X_test_transformed = preprocessor_obj.transform(X_test)
-
-            pd.DataFrame(X_train_transformed).to_csv('/home/minhle/mlops/data/X_train_transformed.csv', index=False)
-            pd.DataFrame(X_test_transformed).to_csv('/home/minhle/mlops/data/X_test_transformed.csv', index=False)
-            pd.DataFrame(y_train).to_csv('/home/minhle/mlops/data/y_train.csv', index=False)
-            pd.DataFrame(y_test).to_csv('/home/minhle/mlops/data/y_test.csv', index=False)
-
-            return X_train_transformed, X_test_transformed, y_train, y_test
-
+            pd.DataFrame(self.X_train_transformed).to_csv('/home/minhle/mlops/data/X_train_transformed.csv', index=False)
+            pd.DataFrame(self.X_test_transformed).to_csv('/home/minhle/mlops/data/X_test_transformed.csv', index=False)
+            pd.DataFrame(self.y_train).to_csv('/home/minhle/mlops/data/y_train.csv', index=False)
+            pd.DataFrame(self.y_test).to_csv('/home/minhle/mlops/data/y_test.csv', index=False)

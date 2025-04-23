@@ -3546,3 +3546,213 @@ airflow.exceptions.DuplicateTaskIdFound: Task id 'get_data' has already been add
 [2025-04-23T18:12:37.479+0700] {logging_mixin.py:190} INFO - [2025-04-23T18:12:37.479+0700] {dag.py:3239} INFO - Sync 1 DAGs
 [2025-04-23T18:12:37.487+0700] {logging_mixin.py:190} INFO - [2025-04-23T18:12:37.487+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
 [2025-04-23T18:12:37.558+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.842 seconds
+[2025-04-23T23:41:32.083+0700] {processor.py:186} INFO - Started process (PID=407744) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:41:32.091+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:41:32.094+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:41:32.093+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:41:33.689+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:41:33.696+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:41:33.696+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:41:33.704+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:41:33.704+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:41:33.776+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.698 seconds
+[2025-04-23T23:42:04.528+0700] {processor.py:186} INFO - Started process (PID=408058) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:42:04.529+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:42:04.530+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:42:04.530+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:42:06.146+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:42:06.154+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:42:06.154+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:42:06.162+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:42:06.162+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:42:06.483+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.959 seconds
+[2025-04-23T23:42:36.863+0700] {processor.py:186} INFO - Started process (PID=408240) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:42:36.864+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:42:36.865+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:42:36.865+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:42:38.685+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:42:38.694+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:42:38.694+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:42:38.704+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:42:38.704+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:42:38.773+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.913 seconds
+[2025-04-23T23:43:09.235+0700] {processor.py:186} INFO - Started process (PID=408378) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:43:09.235+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:43:09.236+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:43:09.236+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:43:11.038+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:43:11.045+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:43:11.045+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:43:11.054+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:43:11.054+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:43:11.159+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.931 seconds
+[2025-04-23T23:43:41.457+0700] {processor.py:186} INFO - Started process (PID=408473) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:43:41.458+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:43:41.459+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:43:41.458+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:43:43.204+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:43:43.212+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:43:43.212+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:43:43.220+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:43:43.220+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:43:43.310+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.855 seconds
+[2025-04-23T23:44:13.681+0700] {processor.py:186} INFO - Started process (PID=408697) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:44:13.681+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:44:13.682+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:44:13.682+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:44:15.440+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:44:15.535+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:44:15.535+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:44:15.546+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:44:15.546+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:44:15.655+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.980 seconds
+[2025-04-23T23:44:46.105+0700] {processor.py:186} INFO - Started process (PID=409340) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:44:46.106+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:44:46.106+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:44:46.106+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:44:47.913+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:44:47.921+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:44:47.921+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:44:47.931+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:44:47.930+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:44:48.027+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.926 seconds
+[2025-04-23T23:45:18.594+0700] {processor.py:186} INFO - Started process (PID=409630) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:45:18.595+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:45:18.596+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:45:18.596+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:45:20.393+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:45:20.410+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:45:20.410+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:45:20.419+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:45:20.419+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:45:21.452+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 2.865 seconds
+[2025-04-23T23:45:52.000+0700] {processor.py:186} INFO - Started process (PID=409919) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:45:52.001+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:45:52.002+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:45:52.002+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:45:53.848+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:45:53.857+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:45:53.856+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:45:53.866+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:45:53.866+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:45:54.077+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 2.083 seconds
+[2025-04-23T23:46:24.599+0700] {processor.py:186} INFO - Started process (PID=410235) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:46:24.600+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:46:24.601+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:46:24.600+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:46:26.404+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:46:26.411+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:46:26.411+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:46:26.420+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:46:26.420+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:46:26.483+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.888 seconds
+[2025-04-23T23:46:56.730+0700] {processor.py:186} INFO - Started process (PID=410552) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:46:56.738+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:46:56.740+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:46:56.740+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:46:58.412+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:46:58.420+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:46:58.420+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:46:58.429+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:46:58.428+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:46:58.515+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.791 seconds
+[2025-04-23T23:47:29.430+0700] {processor.py:186} INFO - Started process (PID=410848) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:47:29.431+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:47:29.433+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:47:29.432+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:47:31.110+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:47:31.117+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:47:31.117+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:47:31.125+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:47:31.125+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:47:31.210+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.788 seconds
+[2025-04-23T23:48:01.622+0700] {processor.py:186} INFO - Started process (PID=411141) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:48:01.623+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:48:01.624+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:48:01.624+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:48:03.469+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:48:03.477+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:48:03.476+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:48:03.485+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:48:03.485+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:48:03.572+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.956 seconds
+[2025-04-23T23:48:36.752+0700] {processor.py:186} INFO - Started process (PID=411644) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:48:36.753+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:48:36.754+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:48:36.754+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:48:38.708+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:48:38.717+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:48:38.717+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:48:38.726+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:48:38.726+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:48:38.843+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 2.096 seconds
+[2025-04-23T23:49:09.217+0700] {processor.py:186} INFO - Started process (PID=412062) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:49:09.218+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:49:09.219+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:49:09.219+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:49:11.150+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:49:11.160+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:49:11.160+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:49:11.170+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:49:11.170+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:49:11.253+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 2.040 seconds
+[2025-04-23T23:49:49.504+0700] {processor.py:186} INFO - Started process (PID=412876) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:49:49.506+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:49:49.507+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:49:49.506+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:49:51.268+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:49:51.275+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:49:51.275+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:49:51.284+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:49:51.284+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:49:51.379+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.883 seconds
+[2025-04-23T23:50:21.618+0700] {processor.py:186} INFO - Started process (PID=413592) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:50:21.620+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:50:21.622+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:50:21.621+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:50:23.319+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:50:23.327+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:50:23.327+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:50:23.336+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:50:23.336+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:50:23.429+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.818 seconds
+[2025-04-23T23:50:53.837+0700] {processor.py:186} INFO - Started process (PID=413933) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:50:53.838+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:50:53.838+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:50:53.838+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:50:55.776+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:50:55.783+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:50:55.783+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:50:55.792+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:50:55.792+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:50:55.877+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 2.044 seconds
+[2025-04-23T23:51:26.236+0700] {processor.py:186} INFO - Started process (PID=414241) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:51:26.248+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:51:26.249+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:51:26.249+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:51:28.039+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:51:28.048+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:51:28.048+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:51:28.056+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:51:28.056+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:51:28.209+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.978 seconds
+[2025-04-23T23:51:58.340+0700] {processor.py:186} INFO - Started process (PID=414785) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:51:58.366+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:51:58.367+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:51:58.367+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:52:00.178+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:52:00.188+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:52:00.187+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:52:00.197+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:52:00.197+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:52:00.318+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.985 seconds
+[2025-04-23T23:52:31.195+0700] {processor.py:186} INFO - Started process (PID=415113) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:52:31.196+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:52:31.197+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:52:31.196+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:52:32.988+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:52:32.996+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:52:32.995+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:52:33.004+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:52:33.004+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:52:33.091+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.899 seconds
+[2025-04-23T23:53:03.608+0700] {processor.py:186} INFO - Started process (PID=415464) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:53:03.609+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:53:03.611+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:53:03.610+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:53:05.421+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:53:05.429+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:53:05.429+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:53:05.439+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:53:05.439+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:53:05.630+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 2.030 seconds
+[2025-04-23T23:53:35.921+0700] {processor.py:186} INFO - Started process (PID=415998) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:53:35.923+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:53:35.925+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:53:35.925+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:53:37.685+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:53:37.692+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:53:37.692+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:53:37.702+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:53:37.702+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:53:37.796+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.884 seconds
+[2025-04-23T23:54:08.189+0700] {processor.py:186} INFO - Started process (PID=416470) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:54:08.191+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:54:08.193+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:54:08.192+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:54:09.795+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:54:09.802+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:54:09.802+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:54:09.811+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:54:09.811+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:54:09.897+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.718 seconds
+[2025-04-23T23:54:48.964+0700] {processor.py:186} INFO - Started process (PID=417028) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:54:48.965+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:54:48.966+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:54:48.966+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:54:50.593+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:54:50.601+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:54:50.600+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:54:50.609+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:54:50.609+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:54:50.721+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.763 seconds
+[2025-04-23T23:55:21.537+0700] {processor.py:186} INFO - Started process (PID=417530) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:55:21.538+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:55:21.539+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:55:21.539+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:55:23.113+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:55:23.120+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:55:23.120+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:55:23.129+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:55:23.128+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:55:23.224+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.694 seconds
+[2025-04-23T23:55:53.392+0700] {processor.py:186} INFO - Started process (PID=417857) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:55:53.392+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:55:53.393+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:55:53.393+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:55:54.985+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:55:54.993+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:55:54.993+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:55:55.003+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:55:55.002+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:55:55.083+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.695 seconds
+[2025-04-23T23:56:25.410+0700] {processor.py:186} INFO - Started process (PID=418168) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:56:25.411+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:56:25.412+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:56:25.412+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:56:27.031+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:56:27.039+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:56:27.039+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:56:27.047+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:56:27.047+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:56:27.132+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.731 seconds
+[2025-04-23T23:57:01.958+0700] {processor.py:186} INFO - Started process (PID=418594) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:57:01.970+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:57:01.973+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:01.972+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:57:03.551+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:57:03.578+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:03.578+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:57:03.587+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:03.587+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:57:03.676+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.725 seconds
+[2025-04-23T23:57:34.451+0700] {processor.py:186} INFO - Started process (PID=418960) to work on /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:57:34.458+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/model_training.py for tasks to queue
+[2025-04-23T23:57:34.460+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:34.459+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:57:36.168+0700] {processor.py:925} INFO - DAG(s) 'model_pipeline_v01' retrieved from /home/minhle/mlops/dags/model_training.py
+[2025-04-23T23:57:36.176+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:36.176+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-23T23:57:36.186+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:36.186+0700] {dag.py:4180} INFO - Setting next_dagrun for model_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-23T23:57:36.279+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/model_training.py took 1.840 seconds

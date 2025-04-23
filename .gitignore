@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+*.pyo
+
+# Environment
+.env
+venv/
+.envrc
+.venv/
+*.swp
+
+# DVC
+.dvc/tmp/
+.dvc/cache/
+.dvc/plots/
+**/.DS_Store
+
+# Data files
+/data/*.csv
+!data/web_churn_raw.csv  # nếu bạn muốn giữ file raw nhỏ này làm ví dụ
+
+# Logs
+logs/
+mlruns/
+airflow.db
+airflow.cfg
+webserver_config.py  # nếu chứa cấu hình nhạy cảm
+
+# Jupyter
+*.ipynb_checkpoints
+.ipynb_checkpoints
+
+# MLflow
+metrics.csv
+params.yml
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Others
+*.log
