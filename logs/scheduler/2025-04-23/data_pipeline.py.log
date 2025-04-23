@@ -6184,3 +6184,17 @@ TypeError: 'module' object is not callable. Did you mean: 'datetime.datetime(...
 [2025-04-23T23:57:56.178+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:56.178+0700] {dag.py:3239} INFO - Sync 1 DAGs
 [2025-04-23T23:57:56.186+0700] {logging_mixin.py:190} INFO - [2025-04-23T23:57:56.186+0700] {dag.py:4180} INFO - Setting next_dagrun for data_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
 [2025-04-23T23:57:56.266+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/data_pipeline.py took 0.736 seconds
+[2025-04-24T00:17:54.137+0700] {processor.py:186} INFO - Started process (PID=424624) to work on /home/minhle/mlops/dags/data_pipeline.py
+[2025-04-24T00:17:54.137+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/data_pipeline.py for tasks to queue
+[2025-04-24T00:17:54.138+0700] {logging_mixin.py:190} INFO - [2025-04-24T00:17:54.138+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/data_pipeline.py
+[2025-04-24T00:17:54.715+0700] {processor.py:925} INFO - DAG(s) 'data_pipeline_v01' retrieved from /home/minhle/mlops/dags/data_pipeline.py
+[2025-04-24T00:17:54.722+0700] {logging_mixin.py:190} INFO - [2025-04-24T00:17:54.722+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-24T00:17:54.730+0700] {logging_mixin.py:190} INFO - [2025-04-24T00:17:54.730+0700] {dag.py:4180} INFO - Setting next_dagrun for data_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-24T00:17:54.799+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/data_pipeline.py took 0.670 seconds
+[2025-04-24T00:18:27.198+0700] {processor.py:186} INFO - Started process (PID=424816) to work on /home/minhle/mlops/dags/data_pipeline.py
+[2025-04-24T00:18:27.210+0700] {processor.py:914} INFO - Processing file /home/minhle/mlops/dags/data_pipeline.py for tasks to queue
+[2025-04-24T00:18:27.212+0700] {logging_mixin.py:190} INFO - [2025-04-24T00:18:27.211+0700] {dagbag.py:588} INFO - Filling up the DagBag from /home/minhle/mlops/dags/data_pipeline.py
+[2025-04-24T00:18:27.798+0700] {processor.py:925} INFO - DAG(s) 'data_pipeline_v01' retrieved from /home/minhle/mlops/dags/data_pipeline.py
+[2025-04-24T00:18:27.806+0700] {logging_mixin.py:190} INFO - [2025-04-24T00:18:27.806+0700] {dag.py:3239} INFO - Sync 1 DAGs
+[2025-04-24T00:18:27.814+0700] {logging_mixin.py:190} INFO - [2025-04-24T00:18:27.814+0700] {dag.py:4180} INFO - Setting next_dagrun for data_pipeline_v01 to 2025-04-23 00:00:00+00:00, run_after=2025-04-24 00:00:00+00:00
+[2025-04-24T00:18:27.884+0700] {processor.py:208} INFO - Processing /home/minhle/mlops/dags/data_pipeline.py took 0.693 seconds
