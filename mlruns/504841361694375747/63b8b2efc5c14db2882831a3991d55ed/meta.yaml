@@ -1,0 +1,15 @@
+artifact_uri: file:///home/minhle/mlops/mlruns/504841361694375747/63b8b2efc5c14db2882831a3991d55ed/artifacts
+end_time: 1745390530536
+entry_point_name: ''
+experiment_id: '504841361694375747'
+lifecycle_stage: active
+run_id: 63b8b2efc5c14db2882831a3991d55ed
+run_name: LGBM
+run_uuid: 63b8b2efc5c14db2882831a3991d55ed
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1745390517132
+status: 3
+tags: []
+user_id: minhle

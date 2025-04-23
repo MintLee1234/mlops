@@ -1,0 +1,18 @@
+[2025-04-23T13:54:18.087+0700] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-23T13:54:18.091+0700] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: model_pipeline_v01.xgb_train scheduled__2024-10-10T00:00:00+00:00 [queued]>
+[2025-04-23T13:54:18.094+0700] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: model_pipeline_v01.xgb_train scheduled__2024-10-10T00:00:00+00:00 [queued]>
+[2025-04-23T13:54:18.094+0700] {taskinstance.py:2867} INFO - Starting attempt 1 of 6
+[2025-04-23T13:54:18.168+0700] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): xgb_train> on 2024-10-10 00:00:00+00:00
+[2025-04-23T13:54:18.181+0700] {logging_mixin.py:190} WARNING - /home/minhle/miniconda3/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=353729) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-04-23T13:54:18.182+0700] {standard_task_runner.py:72} INFO - Started process 353770 to run task
+[2025-04-23T13:54:18.181+0700] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'model_pipeline_v01', 'xgb_train', 'scheduled__2024-10-10T00:00:00+00:00', '--job-id', '319', '--raw', '--subdir', 'DAGS_FOLDER/model_training.py', '--cfg-path', '/tmp/tmp5__mf32d']
+[2025-04-23T13:54:18.182+0700] {standard_task_runner.py:105} INFO - Job 319: Subtask xgb_train
+[2025-04-23T13:54:18.259+0700] {task_command.py:467} INFO - Running <TaskInstance: model_pipeline_v01.xgb_train scheduled__2024-10-10T00:00:00+00:00 [running]> on host minhle-B760M-DS3H-DDR4
+[2025-04-23T13:54:18.398+0700] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='minhle' AIRFLOW_CTX_DAG_ID='model_pipeline_v01' AIRFLOW_CTX_TASK_ID='xgb_train' AIRFLOW_CTX_EXECUTION_DATE='2024-10-10T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-10T00:00:00+00:00'
+[2025-04-23T13:54:18.400+0700] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-23T13:54:53.379+0700] {python.py:240} INFO - Done. Returned value was: {'model_path': '/tmp/model2.pkl', 'auc': np.float64(0.9751109931703791)}
+[2025-04-23T13:54:53.444+0700] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-23T13:54:53.445+0700] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=model_pipeline_v01, task_id=xgb_train, run_id=scheduled__2024-10-10T00:00:00+00:00, execution_date=20241010T000000, start_date=20250423T065418, end_date=20250423T065453
+[2025-04-23T13:54:53.926+0700] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-04-23T13:54:54.474+0700] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-04-23T13:54:54.569+0700] {local_task_job_runner.py:245} INFO - ::endgroup::

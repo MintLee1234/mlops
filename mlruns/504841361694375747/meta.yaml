@@ -1,0 +1,6 @@
+artifact_location: file:///home/minhle/mlops/mlruns/504841361694375747
+creation_time: 1745390319693
+experiment_id: '504841361694375747'
+last_update_time: 1745390319693
+lifecycle_stage: active
+name: LGBM_Optuna

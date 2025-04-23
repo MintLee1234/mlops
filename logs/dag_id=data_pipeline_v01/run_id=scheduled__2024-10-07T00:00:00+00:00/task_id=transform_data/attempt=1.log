@@ -1,0 +1,119 @@
+[2025-04-23T11:26:33.161+0700] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-23T11:26:33.167+0700] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: data_pipeline_v01.transform_data scheduled__2024-10-07T00:00:00+00:00 [queued]>
+[2025-04-23T11:26:33.170+0700] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: data_pipeline_v01.transform_data scheduled__2024-10-07T00:00:00+00:00 [queued]>
+[2025-04-23T11:26:33.170+0700] {taskinstance.py:2867} INFO - Starting attempt 1 of 6
+[2025-04-23T11:26:33.462+0700] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): transform_data> on 2024-10-07 00:00:00+00:00
+[2025-04-23T11:26:33.481+0700] {standard_task_runner.py:104} INFO - Running: ['airflow', 'tasks', 'run', 'data_pipeline_v01', 'transform_data', 'scheduled__2024-10-07T00:00:00+00:00', '--job-id', '185', '--raw', '--subdir', 'DAGS_FOLDER/data_pipeline.py', '--cfg-path', '/tmp/tmpg4xznl4d']
+[2025-04-23T11:26:33.483+0700] {standard_task_runner.py:105} INFO - Job 185: Subtask transform_data
+[2025-04-23T11:26:33.485+0700] {logging_mixin.py:190} WARNING - /home/minhle/miniconda3/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py:70 DeprecationWarning: This process (pid=313615) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-04-23T11:26:33.485+0700] {standard_task_runner.py:72} INFO - Started process 313686 to run task
+[2025-04-23T11:26:33.744+0700] {task_command.py:467} INFO - Running <TaskInstance: data_pipeline_v01.transform_data scheduled__2024-10-07T00:00:00+00:00 [running]> on host minhle-B760M-DS3H-DDR4
+[2025-04-23T11:26:34.034+0700] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='minhle' AIRFLOW_CTX_DAG_ID='data_pipeline_v01' AIRFLOW_CTX_TASK_ID='transform_data' AIRFLOW_CTX_EXECUTION_DATE='2024-10-07T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-10-07T00:00:00+00:00'
+[2025-04-23T11:26:34.035+0700] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-23T11:26:34.148+0700] {logging_mixin.py:190} WARNING - /home/minhle/mlops/dags/data_pipeline.py:27 FutureWarning: Passing literal json to 'read_json' is deprecated and will be removed in a future version. To read from a literal string, wrap it in a 'StringIO' object.
+[2025-04-23T11:26:34.634+0700] {logging_mixin.py:190} INFO - ✅ Got data from get_data:
+[2025-04-23T11:26:34.643+0700] {logging_mixin.py:190} INFO -             user_id  age gender region_category  ... past_complaint          complaint_status               feedback churn_risk_score
+0  9f420209e7d129f3   29      F            None  ...            Yes  No Information Available           Poor Website                1
+1  ac6e97806267549e   50      M            None  ...            Yes  No Information Available  Poor Customer Service                1
+2  a6aa19b1580eed4e   26      F            City  ...            Yes  No Information Available           Too many ads                0
+3  aeee343277211c2f   63      F         Village  ...             No            Not Applicable           Too many ads                1
+4  82448b5c8ce6390c   64      M            Town  ...             No            Not Applicable   Poor Product Quality                0
+
+[5 rows x 22 columns]
+[2025-04-23T11:26:35.464+0700] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/mlops/dags/data_pipeline.py", line 33, in transform_data
+    X_train_transformed, X_test_transformed, y_train, y_test = data_transformation.initiate_data_transformation(
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/mlops/dags/component/data_transform.py", line 149, in initiate_data_transformation
+    X_train_transformed.to_csv('/home/minhle/mlops/data/X_train.csv', index=False)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'to_csv'
+[2025-04-23T11:26:35.468+0700] {taskinstance.py:1226} INFO - Marking task as UP_FOR_RETRY. dag_id=data_pipeline_v01, task_id=transform_data, run_id=scheduled__2024-10-07T00:00:00+00:00, execution_date=20241007T000000, start_date=20250423T042633, end_date=20250423T042635
+[2025-04-23T11:26:35.673+0700] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-23T11:26:35.674+0700] {standard_task_runner.py:124} ERROR - Failed to execute job 185 for task transform_data ('numpy.ndarray' object has no attribute 'to_csv'; 313686)
+Traceback (most recent call last):
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/miniconda3/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/mlops/dags/data_pipeline.py", line 33, in transform_data
+    X_train_transformed, X_test_transformed, y_train, y_test = data_transformation.initiate_data_transformation(
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minhle/mlops/dags/component/data_transform.py", line 149, in initiate_data_transformation
+    X_train_transformed.to_csv('/home/minhle/mlops/data/X_train.csv', index=False)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'numpy.ndarray' object has no attribute 'to_csv'
+[2025-04-23T11:26:35.703+0700] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-04-23T11:26:35.714+0700] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-04-23T11:26:35.715+0700] {local_task_job_runner.py:245} INFO - ::endgroup::
