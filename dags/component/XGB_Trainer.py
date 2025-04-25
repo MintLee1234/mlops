@@ -4,6 +4,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import f1_score, roc_auc_score
 from xgboost import XGBClassifier
 import optuna
+import mlflow
 
 class XGB_Trainer:
     def __init__(self):
@@ -11,7 +12,6 @@ class XGB_Trainer:
         self.best_f1 = None
         self.best_auc = None
 
-        # Kiểm tra có GPU khả dụng không
         try:
             test_model = XGBClassifier(tree_method='hist', device='cuda')
             test_model.set_params(n_estimators=1)
@@ -20,9 +20,7 @@ class XGB_Trainer:
         except:
             self.use_gpu = False
 
-
-    def fit(self, X_train_transformed, y_train):
-        # Đặt tên cột nếu cần
+    def fit(self, X_train_transformed, y_train, X_test_transformed, y_test):
         if isinstance(X_train_transformed, pd.DataFrame):
             feature_names = X_train_transformed.columns
         else:
@@ -67,7 +65,6 @@ class XGB_Trainer:
             trial.set_user_attr("auc_mean", np.mean(auc_scores))
             return np.mean(f1_scores)
 
-        # Optuna study
         study = optuna.create_study(direction='maximize')
         study.optimize(objective, n_trials=20)
 
@@ -75,7 +72,6 @@ class XGB_Trainer:
         self.best_f1 = best_trial.value
         self.best_auc = best_trial.user_attrs["auc_mean"]
 
-        # Thêm lại GPU params nếu cần
         final_params = {
             **study.best_params,
             'random_state': 42,
@@ -87,7 +83,28 @@ class XGB_Trainer:
         }
 
         best_model = XGBClassifier(**final_params)
-        best_model.fit(X_train_transformed, y_train)
 
-        self.model = best_model
-        return best_model, self.best_auc
+        experiment_name = "XGB trainer"
+        try:
+            mlflow.create_experiment(experiment_name)
+        except mlflow.exceptions.MlflowException:
+            pass
+        mlflow.set_experiment(experiment_name)
+
+        with mlflow.start_run() as run:
+            best_model.fit(X_train_transformed, y_train)
+            probas = best_model.predict_proba(X_test_transformed)[:, 1]
+            auc = roc_auc_score(y_test, probas)
+            f1_score_value = f1_score(y_test, best_model.predict(X_test_transformed), average='macro')
+            mlflow.log_param("model_type", "XGB")
+            mlflow.log_params(final_params)
+            mlflow.log_metric("XGB_f1", f1_score_value)
+            mlflow.log_metric("XGB_auc", auc)
+            mlflow.sklearn.log_model(best_model, "XGB_model", registered_model_name="XGB_Trainer")
+
+            run_id = run.info.run_id
+            with open("last_xgb_run_id.txt", "a") as f:
+                f.write(run_id + "\n")
+
+        print(f"✅ Finished MLflow run: {run_id}")
+        return {'run_id': run_id}
