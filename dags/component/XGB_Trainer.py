@@ -5,6 +5,7 @@ from sklearn.metrics import f1_score, roc_auc_score
 from xgboost import XGBClassifier
 import optuna
 import mlflow
+from datetime import datetime
 
 class XGB_Trainer:
     def __init__(self):
@@ -100,11 +101,13 @@ class XGB_Trainer:
             mlflow.log_params(final_params)
             mlflow.log_metric("XGB_f1", f1_score_value)
             mlflow.log_metric("XGB_auc", auc)
-            mlflow.sklearn.log_model(best_model, "XGB_model", registered_model_name="XGB_Trainer")
+            mlflow.sklearn.log_model(best_model, "model", registered_model_name="XGB_Trainer")
 
             run_id = run.info.run_id
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
             with open("last_xgb_run_id.txt", "a") as f:
-                f.write(run_id + "\n")
+                f.write(f"{timestamp} - {run_id}\n")
 
         print(f"✅ Finished MLflow run: {run_id}")
         return {'run_id': run_id}

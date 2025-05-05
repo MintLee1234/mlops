@@ -23,20 +23,13 @@ venv/
 logs/
 mlruns/
 airflow.db
-airflow.cfg
-webserver_config.py  # nếu chứa cấu hình nhạy cảm
 
 # Jupyter
 *.ipynb_checkpoints
 .ipynb_checkpoints
 
-# MLflow
-metrics.csv
-params.yml
+
 
 # OS-specific
 .DS_Store
 Thumbs.db
-
-# Others
-*.log

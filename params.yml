@@ -1,0 +1,7 @@
+learning_rate: 0.021942780547314186
+min_child_samples: 10
+min_child_weight: 0.1951273111404514
+min_split_gain: 0.6463725854292285
+n_estimators: 80
+reg_alpha: 0.7725577191516885
+reg_lambda: 0.16313855849727638

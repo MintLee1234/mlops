@@ -1,7 +1,6 @@
 import os
 import pandas as pd
 import numpy as np
-
 from sklearn.model_selection import train_test_split
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -9,137 +8,140 @@ from sklearn.impute import SimpleImputer, KNNImputer
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from datetime import datetime
-
+import joblib
 from category_encoders import TargetEncoder
 
 class DataTransformation:
-    def __init__(self, df):
-        self.df = self.transform_data(df)
-        self.X_train, self.X_test, self.y_train, self.y_test = self.train_val_test_splitting()
+    def __init__(self):
+        pass
+
     def transform_data(self, df):
         """
         Performs data transformations on the input DataFrame.
         """
 
-        # Convert data to appropriate dtypes
-        df.drop(columns=['user_id'], axis=1, inplace=True)
-        numerical_columns = ['age', 'days_since_last_login', 'avg_time_spent',
-                            'avg_transaction_value', 'avg_frequency_login_days', 'points_in_wallet', 'churn_risk_score']
-        df[numerical_columns] = df[numerical_columns].apply(pd.to_numeric, errors='coerce')
-        df['last_visit_time'] = pd.to_datetime(df['last_visit_time'], format='%H:%M:%S')
-        categorical_columns = ['gender', 'region_category', 'membership_category',
+        df = df.copy()  # tránh SettingWithCopyWarning
+
+        user_id = df['user_id']
+        df.drop(columns=['user_id'], inplace=True)
+
+        # Convert data types
+        numeric_cols = ['age', 'days_since_last_login', 'avg_time_spent', 'avg_transaction_value',
+                        'avg_frequency_login_days', 'points_in_wallet']
+        df[numeric_cols] = df[numeric_cols].apply(pd.to_numeric, errors='coerce')
+        df['last_visit_time'] = pd.to_datetime(df['last_visit_time'], format='%H:%M:%S', errors='coerce')
+
+        categorical_cols = ['gender', 'region_category', 'membership_category',
                             'joined_through_referral', 'preferred_offer_types', 'medium_of_operation',
                             'internet_option', 'used_special_discount', 'offer_application_preference',
                             'past_complaint', 'complaint_status', 'feedback']
-        df[categorical_columns] = df[categorical_columns].astype('object')
-        df['joining_date'] = pd.to_datetime(df['joining_date'])
+        df[categorical_cols] = df[categorical_cols].astype('object')
+        df['joining_date'] = pd.to_datetime(df['joining_date'], errors='coerce')
 
-        # Impute missing values
-        # Iterative Imputer for numerical columns
-        target_column = 'churn_risk_score'
-        numeric_columns = df.select_dtypes(include='number').columns.drop(target_column)
-        scaler = StandardScaler()
-        df_scaled = df.copy()
-        df_scaled[numeric_columns] = scaler.fit_transform(df[numeric_columns])
-        imputer = SimpleImputer()
-        df_scaled[numeric_columns] = imputer.fit_transform(df_scaled[numeric_columns])
-        df[numeric_columns] = scaler.inverse_transform(df_scaled[numeric_columns])
-
-        # KNN Imputer for categorical columns
+        # Handle missing values
         df['gender'] = df['gender'].replace('Unknown', np.nan)
-        categorical_columns = ['gender', 'region_category', 'joined_through_referral', 'medium_of_operation',
-                            'preferred_offer_types']
+
+        # Impute numerical columns
+        scaler = StandardScaler()
+        imputer_num = SimpleImputer()
+        df_scaled = df[numeric_cols].copy()
+        df_scaled = scaler.fit_transform(df_scaled)
+        df_scaled = imputer_num.fit_transform(df_scaled)
+        df[numeric_cols] = scaler.inverse_transform(df_scaled)
+
+        # Impute categorical columns
+        cat_impute_cols = ['gender', 'region_category', 'joined_through_referral',
+                        'medium_of_operation', 'preferred_offer_types']
         encoder = OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1)
-        encoder.fit(df[categorical_columns])
-        df[categorical_columns] = encoder.transform(df[categorical_columns])
-        imputer = KNNImputer(n_neighbors=5, metric='nan_euclidean', weights='distance')
-        df[categorical_columns] = imputer.fit_transform(df[categorical_columns])
-        for col in categorical_columns:
-            df[col] = df[col].astype('object')
+        df_cat = encoder.fit_transform(df[cat_impute_cols])
+        imputer_cat = KNNImputer(n_neighbors=5, weights='distance', metric='nan_euclidean')
+        df_cat_imputed = imputer_cat.fit_transform(df_cat)
+        df[cat_impute_cols] = encoder.inverse_transform(df_cat_imputed).astype('object')
 
-        # Feature Engineering
-        specific_date = datetime(2024, 5, 17)
-        df['tenure_months'] = ((specific_date.year - df['joining_date'].dt.year) * 12 +
-                            (specific_date.month - df['joining_date'].dt.month)).astype('int64')
-        df['visit_hour'] = df['last_visit_time'].dt.hour.astype('int64')
-        df['login_spend_ratio'] = df.apply(
-            lambda row: 0 if row['avg_frequency_login_days'] == 0 else row['avg_time_spent'] / row['avg_frequency_login_days'],
-            axis=1
-        )
-        df['login_transaction_ratio'] = df.apply(
-            lambda row: 0 if row['avg_transaction_value'] == 0 else row['avg_frequency_login_days'] / row['avg_transaction_value'],
-            axis=1
-        )
+        # Feature engineering
+        today = datetime(2024, 5, 17)  # hoặc datetime.today() nếu muốn tính động
+        df['tenure_months'] = ((today.year - df['joining_date'].dt.year) * 12 +
+                            (today.month - df['joining_date'].dt.month)).astype('int64')
+        df['visit_hour'] = df['last_visit_time'].dt.hour.astype('Int64')
 
-        df = df.drop(columns=['joining_date', 'last_visit_time'])
+        df['login_spend_ratio'] = np.where(df['avg_frequency_login_days'] == 0, 0,
+                                        df['avg_time_spent'] / df['avg_frequency_login_days'])
+        df['login_transaction_ratio'] = np.where(df['avg_transaction_value'] == 0, 0,
+                                                df['avg_frequency_login_days'] / df['avg_transaction_value'])
+
+        df.drop(columns=['last_visit_time'], inplace=True)
 
         # Rename columns
-        rename_mapping = {
+        df.rename(columns={
             'avg_frequency_login_days': 'frequency',
             'avg_transaction_value': 'monetary',
             'days_since_last_login': 'recency'
-        }
+        }, inplace=True)
 
-        df = df.rename(columns=rename_mapping)
-
+        df['user_id'] = user_id
         return df
+    
     def get_transformer_obj(self, X_train, y_train):
-            numerical_cols = ['age',
-                            'recency',
-                            'avg_time_spent',
-                            'monetary',
-                            'frequency',
-                            'points_in_wallet',
-                            'tenure_months',
-                            'visit_hour',
-                            'login_spend_ratio',
-                            'login_transaction_ratio'
-                        ]
-            categorical_cols = ['gender',
-                                'region_category',
-                                'membership_category',
-                                'joined_through_referral',
-                                'preferred_offer_types',
-                                'internet_option',
-                                'used_special_discount',
-                                'offer_application_preference',
-                                'past_complaint',
-                                'complaint_status',
-                                'feedback',
-                                'medium_of_operation'
-                            ]
+        numerical_cols = [
+            'age', 'recency', 'avg_time_spent', 'monetary', 'frequency',
+            'points_in_wallet', 'tenure_months', 'visit_hour',
+            'login_spend_ratio', 'login_transaction_ratio'
+        ]
+        
+        categorical_cols = [
+            'gender','region_category', 'membership_category', 'joined_through_referral',
+            'preferred_offer_types', 'internet_option', 'used_special_discount',
+            'offer_application_preference', 'past_complaint', 'complaint_status',
+            'feedback', 'medium_of_operation'
+        ]
 
-            numeric_transformer = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy='median')),
-                ('scaler', MinMaxScaler())
-            ])
+        # Pipelines for each type of feature
+        numeric_transformer = Pipeline(steps=[
+            ('imputer', SimpleImputer(strategy='median')),
+            ('scaler', MinMaxScaler())
+        ])
 
-            categorical_transformer = Pipeline(steps=[
-                ('target_encoder', TargetEncoder(cols=categorical_cols))
+        categorical_transformer = Pipeline(steps=[
+            ('target_encoder', TargetEncoder(cols=categorical_cols))
+        ])
 
-            ])
+        # Create ColumnTransformer
+        preprocessor = ColumnTransformer(
+            transformers=[
+                ('numerical', numeric_transformer, numerical_cols),
+                ('categorical', categorical_transformer, categorical_cols)
+            ],
+            remainder='passthrough'  # Keep any extra columns as-is (e.g. 'user_id')
+        )
 
-            preprocessor = ColumnTransformer(
-                transformers=[
-                    ('numerical', numeric_transformer, numerical_cols),
-                    ('categorical', categorical_transformer, categorical_cols)
-                ],
-                remainder='passthrough'
-            )
+        # Fit ONLY — do NOT transform here
+        preprocessor.fit(X_train, y_train)
 
-            preprocessor.fit(X_train, y_train)
+        # Save the preprocessor
+        os.makedirs('preprocessors', exist_ok=True)
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f'preprocessor_{timestamp}.pkl'
+        filepath = os.path.join('preprocessors', filename)
 
-            return preprocessor
+        joblib.dump(preprocessor, filepath)
 
+        # Log the save time and path
+        with open('preprocessors/preprocessor_versions.txt', 'a') as log_file:
+            log_file.write(f'{datetime.now()} - {filepath}\n')
 
-    def train_val_test_splitting(self):
+        return preprocessor
+
+    def train_val_test_splitting(self, df):
+            self.df = df
             X = self.df.drop(columns=["churn_risk_score"])
             y = self.df["churn_risk_score"]
             self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.3, random_state=42)  
             return self.X_train, self.X_test, self.y_train, self.y_test
 
-    def initiate_data_transformation(self):
-
+        
+    def initiate_data_transformation(self, df):
+            self.df = df
+            self.X_train, self.X_test, self.y_train, self.y_test = self.train_val_test_splitting(self.df)
             preprocessor_obj = self.get_transformer_obj(self.X_train, self.y_train)
 
             self.X_train_transformed = preprocessor_obj.transform(self.X_train)
