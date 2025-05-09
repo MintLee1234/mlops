@@ -55,7 +55,7 @@ class LGBM_Trainer:
 
             trial.set_user_attr("mean_f1", np.mean(f1_scores))
             trial.set_user_attr("mean_auc", np.mean(auc_scores))
-            return np.mean(f1_scores)
+            return np.mean(auc_scores)
 
         study = optuna.create_study(direction='maximize')
         study.optimize(objective, n_trials=20)

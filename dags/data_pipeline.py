@@ -1,11 +1,27 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from component.data_transform import DataTransformation
+from component.data_ingestion import PostgresDataIngestor  
 import pandas as pd
+import numpy as np
 import datetime as dt
 import mlflow
-import os
 import joblib
+from prometheus_client import Gauge
+
+# Prometheus metrics
+daily_crawled_count = Gauge('daily_crawled_count', 'Số lượng user được crawl hôm nay')
+prediction_class_0 = Gauge('prediction_class_count_0', 'Số lượng user phân loại là 0')
+prediction_class_1 = Gauge('prediction_class_count_1', 'Số lượng user phân loại là 1')
+
+# DB Config
+DB_CONFIG = {
+    "host": "34.126.156.40",
+    "port": 5432,
+    "database": "gold_table",
+    "user": "mintlee",
+    "password": "1highbar456"
+}
 
 default_args = {
     'owner': 'minhle',
@@ -13,40 +29,47 @@ default_args = {
     'retry_delay': dt.timedelta(minutes=1)
 }
 
-def save_csv_append_or_create(df, path):
-    df.to_csv(path, mode='a' if os.path.exists(path) else 'w', index=False, header=not os.path.exists(path))
-
 def crawl_data(**kwargs):
     today_str = dt.date.today().strftime('%Y-%m-%d')
     df = pd.read_csv(kwargs['crawl_source_path'])
-    df = df[df['joining_date'] == today_str].drop(columns=['churn_risk_score'], errors='ignore')
-    save_csv_append_or_create(df, kwargs['bronze_data'])
-    print("✅ Crawled data successfully")
+    df_today = df[df['joining_date'] == today_str].drop(columns=['churn_risk_score'], errors='ignore')
 
-def transform_data(**kwargs):
+    daily_crawled_count.set(len(df_today))
+
+    if df_today.empty:
+        print("⚠️ Không có dữ liệu để crawl.")
+        return
+
+    ingestor = PostgresDataIngestor(**DB_CONFIG)
+    ingestor.ingest_data(table_name='bronze_data', data_source=df_today, mode='append')
+
+def transform_data():
     today_str = dt.date.today().strftime('%Y-%m-%d')
-    df = pd.read_csv(kwargs['bronze_data'])
+
+    ingestor = PostgresDataIngestor(**DB_CONFIG)
+    df = ingestor.read_table('bronze_data')
     df_today = df[df['joining_date'] == today_str]
-    
+
     if df_today.empty:
         print("⚠️ Không có dữ liệu để transform.")
         return
-    
+
     transformer = DataTransformation()
     silver_df = transformer.transform_data(df_today)
     silver_df['churn_risk_score'] = pd.NA
-    save_csv_append_or_create(silver_df, kwargs['silver_table'])
 
-    print("✅ Transform data successfully")
-    print(silver_df.head())
+    ingestor.ingest_data(table_name='silver_data', data_source=silver_df, mode='append')
+    print("✅ Transform completed")
 
 def daily_prediction(**kwargs):
     today_str = dt.date.today().strftime('%Y-%m-%d')
-    df = pd.read_csv(kwargs['silver_table'])
+
+    ingestor = PostgresDataIngestor(**DB_CONFIG)
+    df = ingestor.read_table('silver_data')
     df_today = df[df['joining_date'] == today_str]
-    
+
     if df_today.empty:
-        print("⚠️ Không có dữ liệu người dùng mới cho hôm nay.")
+        print("⚠️ Không có dữ liệu để dự đoán.")
         return
 
     user_id = df_today['user_id'].reset_index(drop=True)
@@ -54,7 +77,7 @@ def daily_prediction(**kwargs):
     df_today = df_today.drop(columns=['user_id', 'churn_risk_score'], errors='ignore')
 
     try:
-        with open('preprocessors/preprocessor_versions.txt') as f:
+        with open(kwargs['preprocessor_log']) as f:
             preprocessor_path = f.readlines()[-1].strip().split(' - ')[-1]
         preprocessor = joblib.load(preprocessor_path)
     except Exception as e:
@@ -66,11 +89,16 @@ def daily_prediction(**kwargs):
             model_id = f.readlines()[-1].strip().split(' - ')[-1]
         model = mlflow.pyfunc.load_model(f"runs:/{model_id}/model")
     except Exception as e:
-        print(f"❌ Lỗi load model từ MLflow: {e}")
+        print(f"❌ Lỗi load model: {e}")
         return
 
     df_transformed = preprocessor.transform(df_today)
     predictions = model.predict(df_transformed)
+
+    unique, counts = np.unique(predictions, return_counts=True)
+    count_dict = dict(zip(unique, counts))
+    prediction_class_0.set(count_dict.get(0, 0))
+    prediction_class_1.set(count_dict.get(1, 0))
 
     results = pd.DataFrame({
         'user_id': user_id,
@@ -78,8 +106,8 @@ def daily_prediction(**kwargs):
         'prediction': predictions
     })
 
-    save_csv_append_or_create(results, '/home/minhle/mlops/data/predictions.csv')
-    print("✅ Daily prediction completed successfully")
+    ingestor.ingest_data(table_name='predictions', data_source=results, mode='append')
+    print("✅ Predictions inserted")
 
 with DAG(
     default_args=default_args,
@@ -94,25 +122,20 @@ with DAG(
         task_id='crawl_data',
         python_callable=crawl_data,
         op_kwargs={
-            'crawl_source_path': '/home/minhle/mlops/data/web_churn_raw.csv',
-            'bronze_data': '/home/minhle/mlops/data/bronze_data.csv'
+            'crawl_source_path': '/home/minhle/mlops/data/web_churn_raw.csv'
         },
     )
 
     task1 = PythonOperator(
         task_id='transform_data',
-        python_callable=transform_data,
-        op_kwargs={
-            'silver_table': '/home/minhle/mlops/data/silver_data.csv',
-            'bronze_data': '/home/minhle/mlops/data/bronze_data.csv'
-        },
+        python_callable=transform_data
     )
 
     task2 = PythonOperator(
         task_id='daily_prediction',
         python_callable=daily_prediction,
         op_kwargs={
-            'silver_table': '/home/minhle/mlops/data/silver_data.csv',
+            'preprocessor_log': '/home/minhle/mlops/preprocessors/preprocessor_versions.txt',
             'model_id_log': '/home/minhle/mlops/last_best_run_id.txt'
         },
     )

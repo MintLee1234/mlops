@@ -64,7 +64,7 @@ class XGB_Trainer:
                 auc_scores.append(auc)
 
             trial.set_user_attr("auc_mean", np.mean(auc_scores))
-            return np.mean(f1_scores)
+            return np.mean(auc_scores)
 
         study = optuna.create_study(direction='maximize')
         study.optimize(objective, n_trials=20)

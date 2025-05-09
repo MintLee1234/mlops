@@ -10,11 +10,20 @@ from component.LGBM_Trainer import LGBM_Trainer
 from component.XGB_Trainer import XGB_Trainer
 from component.model_evaluation import ModelEvaluation
 from component.data_transform import DataTransformation
+from component.data_ingestion import PostgresDataIngestor
 
 default_args = {
     'owner': 'minhle',
     'retries': 1,
     'retry_delay': timedelta(minutes=1)
+}
+
+DB_CONFIG = {
+    "host": "34.126.156.40",
+    "port": 5432,
+    "database": "gold_table",
+    "user": "mintlee",
+    "password": "1highbar456"
 }
 
 def get_last_month_range():
@@ -40,13 +49,12 @@ def monthly_crawl_data(**kwargs):
 
 def update_gold_data(**kwargs):
     ti = kwargs['ti']
-    df = pd.read_csv(kwargs['silver_data'])
-    df['joining_date'] = pd.to_datetime(df['joining_date'])
+    pg_ingestor = PostgresDataIngestor(**DB_CONFIG)
 
+    df = pg_ingestor.read_table('silver_data')
     start, end = get_last_month_range()
-    print(f"📅 Crawl dữ liệu từ {start} đến {end}")
-
     filtered = df[(df['joining_date'] >= start) & (df['joining_date'] <= end)].copy()
+
     label_path = ti.xcom_pull(task_ids='monthly_crawl_data', key='label_path')
     
     if label_path:
@@ -55,37 +63,36 @@ def update_gold_data(**kwargs):
         filtered = filtered.drop(columns=['churn_risk_score'], errors='ignore')
         filtered = pd.merge(filtered, labels[['user_id', 'churn_risk_score']], on='user_id', how='left')
 
-        silver_columns = pd.read_csv(kwargs['silver_data'], nrows=1).columns
-        filtered = filtered[silver_columns]
-        filtered.to_csv(kwargs['gold_data'], mode='a', index=False, header=False)
-
+        pg_ingestor.ingest_data('gold_data', filtered, mode='append')
 
 def monthly_evaluation(**kwargs):
     ti = kwargs['ti']
-    df = pd.read_csv(kwargs['prediction_data'])
-    df['joining_date'] = pd.to_datetime(df['joining_date'])
+    pg_ingestor = PostgresDataIngestor(**DB_CONFIG)
 
+    df = pg_ingestor.read_table('predictions')
     start, end = get_last_month_range()
-    print(f"📅 Lọc dữ liệu từ {start} đến {end}")
+    filtered = df[(df['joining_date'] >= start) & (df['joining_date'] <= end)]
 
-    y_pred = df[(df['joining_date'] >= start) & (df['joining_date'] <= end)]['prediction']
     label_path = ti.xcom_pull(task_ids='monthly_crawl_data', key='label_path')
     y_test = pd.read_csv(label_path)['churn_risk_score'] if label_path else []
+    y_pred = filtered['prediction']
 
     acc = accuracy_score(y_test, y_pred)
     roc_auc = roc_auc_score(y_test, y_pred)
-    print(f"✅ Accuracy: {acc:.4f}, ROC AUC: {roc_auc:.4f}")
+
+    print(f"✅ Evaluation completed: Accuracy={acc:.4f}, ROC AUC={roc_auc:.4f}")
     ti.xcom_push(key='accuracy', value=acc)
 
 def check_accuracy_branch(**kwargs):
     acc = kwargs['ti'].xcom_pull(task_ids='monthly_evaluation', key='accuracy')
     return 'data_prepare' if acc and acc < 0.95 else 'skip_tasks'
 
-def data_prepare(**kwargs):
-    df = pd.read_csv(kwargs['gold_data'])
+def data_prepare():
+    pg_ingestor = PostgresDataIngestor(**DB_CONFIG)
+
+    df = pg_ingestor.read_table('gold_data')
     df.drop(columns=['user_id', 'joining_date'], inplace=True)
     DataTransformation().initiate_data_transformation(df)
-    print("✅ Data preparation completed")
 
 def _train_model(trainer_class, **kwargs):
     X_train = pd.read_csv(kwargs['X_train_transformed_file_path'])
@@ -149,18 +156,11 @@ with DAG(
     task1 = PythonOperator(
         task_id='update_gold_data', 
         python_callable=update_gold_data,
-        op_kwargs={
-            'silver_data': '/home/minhle/mlops/data/silver_data.csv',
-            'gold_data': '/home/minhle/mlops/data/gold_data.csv'
-        }
     )
 
     task2 = PythonOperator(
         task_id='monthly_evaluation', 
         python_callable=monthly_evaluation,
-        op_kwargs={
-            'prediction_data': '/home/minhle/mlops/data/predictions.csv'
-        }
     )
 
     branch = BranchPythonOperator(task_id='check_accuracy_branch', python_callable=check_accuracy_branch)
@@ -169,9 +169,6 @@ with DAG(
     task3 = PythonOperator(
         task_id='data_prepare', 
         python_callable=data_prepare,
-        op_kwargs={
-            'gold_data': '/home/minhle/mlops/data/gold_data.csv'
-        }
     )
 
     task4 = PythonOperator(
