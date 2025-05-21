@@ -18,7 +18,6 @@ class ModelEvaluation:
         return y_pred, y_pred_proba
 
     def model_evaluation(self, y_val, y_pred, y_pred_proba):
-        # Evaluation metrics
         accuracy = accuracy_score(y_val, y_pred)
         precision = precision_score(y_val, y_pred, average='weighted')
         recall = recall_score(y_val, y_pred, average='weighted')
@@ -26,16 +25,22 @@ class ModelEvaluation:
         roc_auc = roc_auc_score(y_val, y_pred_proba[:, 1])
         pr_auc = average_precision_score(y_val, y_pred_proba[:, 1])
 
-
-
-
-        # Print detailed classification report and confusion matrix
+        # Print classification report and confusion matrix
         print("Classification Report:\n", classification_report(y_val, y_pred))
         print("Confusion Matrix:\n", confusion_matrix(y_val, y_pred))
 
-        
-        # Return evaluation metrics
-        return accuracy, precision, recall, f1, roc_auc, pr_auc
+        # Return as dictionary
+        metrics = {
+            "accuracy": accuracy,
+            "precision": precision,
+            "recall": recall,
+            "f1_score": f1,
+            "roc_auc": roc_auc,
+            "pr_auc": pr_auc
+        }
+
+        return metrics
+
 
     def plot_roc_curve(self, y_val, y_pred_proba):
         # Lấy xác suất class 1
@@ -46,7 +51,7 @@ class ModelEvaluation:
         roc_auc = auc(fpr, tpr)
 
         # Vẽ biểu đồ
-        plt.figure()
+        fig = plt.figure()
         plt.plot(fpr, tpr, color='darkorange', lw=2,
                 label=f'ROC curve (area = {roc_auc:.2f})')
         plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
@@ -56,7 +61,7 @@ class ModelEvaluation:
         plt.ylabel('True Positive Rate')
         plt.title('Receiver Operating Characteristic (ROC) Curve')
         plt.legend(loc="lower right")
-        plt.show()
+        return fig
 
     def plot_pr_curve(self, y_val, y_pred_proba):
         # Lấy xác suất class 1

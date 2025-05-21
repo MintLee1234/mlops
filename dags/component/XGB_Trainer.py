@@ -6,6 +6,9 @@ from xgboost import XGBClassifier
 import optuna
 import mlflow
 from datetime import datetime
+import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/minhle/mlops/mlops-postgresql-6a3c27b9fd84.json"
+
 
 class XGB_Trainer:
     def __init__(self):
@@ -102,8 +105,9 @@ class XGB_Trainer:
             mlflow.log_metric("XGB_f1", f1_score_value)
             mlflow.log_metric("XGB_auc", auc)
             mlflow.sklearn.log_model(best_model, "model", registered_model_name="XGB_Trainer")
-
             run_id = run.info.run_id
+            mlflow.sklearn.save_model(best_model, f'/home/minhle/fastapi_model_serving/model/XGB/{run_id}')
+
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             with open("last_xgb_run_id.txt", "a") as f:

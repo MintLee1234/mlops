@@ -11,6 +11,7 @@ from datetime import datetime
 import joblib
 from category_encoders import TargetEncoder
 
+
 class DataTransformation:
     def __init__(self):
         pass
@@ -89,10 +90,11 @@ class DataTransformation:
         ]
         
         categorical_cols = [
-            'gender','region_category', 'membership_category', 'joined_through_referral',
-            'preferred_offer_types', 'internet_option', 'used_special_discount',
-            'offer_application_preference', 'past_complaint', 'complaint_status',
-            'feedback', 'medium_of_operation'
+            'gender', 'region_category', 'membership_category', 
+            'joined_through_referral', 'preferred_offer_types', 
+            'internet_option', 'used_special_discount',
+            'offer_application_preference', 'past_complaint', 
+            'complaint_status', 'feedback', 'medium_of_operation'
         ]
 
         # Pipelines for each type of feature
@@ -138,7 +140,6 @@ class DataTransformation:
             self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.3, random_state=42)  
             return self.X_train, self.X_test, self.y_train, self.y_test
 
-        
     def initiate_data_transformation(self, df):
             self.df = df
             self.X_train, self.X_test, self.y_train, self.y_test = self.train_val_test_splitting(self.df)

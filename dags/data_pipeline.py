@@ -16,11 +16,11 @@ prediction_class_1 = Gauge('prediction_class_count_1', 'Số lượng user phân
 
 # DB Config
 DB_CONFIG = {
-    "host": "34.126.156.40",
+    "host": "35.194.245.238",
     "port": 5432,
-    "database": "gold_table",
+    "database": "mlops",
     "user": "mintlee",
-    "password": "1highbar456"
+    "password": "123456"
 }
 
 default_args = {
@@ -108,6 +108,7 @@ def daily_prediction(**kwargs):
 
     ingestor.ingest_data(table_name='predictions', data_source=results, mode='append')
     print("✅ Predictions inserted")
+    
 
 with DAG(
     default_args=default_args,

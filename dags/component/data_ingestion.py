@@ -3,6 +3,7 @@ import psycopg2
 from psycopg2.extras import execute_batch
 import numpy as np
 
+
 class PostgresDataIngestor:
     def __init__(self, host, port, database, user, password):
         self.conn = psycopg2.connect(
@@ -77,8 +78,6 @@ class PostgresDataIngestor:
         except Exception as e:
             raise RuntimeError(f"❌ Error clearing data from '{table_name}': {e}")
 
-
-
     def _insert_dataframe(self, table_name, df):
         columns = ', '.join([f'"{col}"' for col in df.columns])
         placeholders = ', '.join(['%s'] * len(df.columns))
@@ -101,7 +100,6 @@ class PostgresDataIngestor:
             self.cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema='public'")
             tables = [row[0] for row in self.cursor.fetchall()]
             print(f"📋 Available tables: {tables}")
-            return tables
         except Exception as e:
             print(f"❌ Error listing tables: {e}")
             return []
