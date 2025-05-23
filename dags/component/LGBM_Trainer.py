@@ -6,8 +6,6 @@ import pandas as pd
 import numpy as np
 import mlflow
 from datetime import datetime
-import os
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/home/minhle/mlops/mlops-postgresql-6a3c27b9fd84.json"
 
 
 class LGBM_Trainer:

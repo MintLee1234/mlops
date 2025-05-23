@@ -13,7 +13,11 @@ from component.data_transform import DataTransformation
 from component.data_ingestion import PostgresDataIngestor
 from psycopg2 import OperationalError
 import shutil
+from dotenv import load_dotenv
+import os
 
+
+load_dotenv()
 
 default_args = {
     'owner': 'minhle',
@@ -22,11 +26,11 @@ default_args = {
 }
 
 DB_CONFIG = {
-    "host": "35.194.245.238",
-    "port": 5432,
-    "database": "mlops",
-    "user": "mintlee",
-    "password": "123456"
+    "host": os.getenv("DB_HOST"),
+    "port": os.getenv("DB_PORT"),
+    "database": os.getenv("DATABASE"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PW")
 }
 
 

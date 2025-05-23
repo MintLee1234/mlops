@@ -28,7 +28,8 @@ airflow.db
 *.ipynb_checkpoints
 .ipynb_checkpoints
 
-
+# prometheus
+prometheus/
 
 # OS-specific
 .DS_Store

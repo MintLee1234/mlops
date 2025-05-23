@@ -1,26 +1,32 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from component.data_transform import DataTransformation
-from component.data_ingestion import PostgresDataIngestor  
+from component.data_ingestion import PostgresDataIngestor
 import pandas as pd
 import numpy as np
 import datetime as dt
 import mlflow
 import joblib
-from prometheus_client import Gauge
+from dotenv import load_dotenv
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Prometheus metrics
-daily_crawled_count = Gauge('daily_crawled_count', 'Số lượng user được crawl hôm nay')
-prediction_class_0 = Gauge('prediction_class_count_0', 'Số lượng user phân loại là 0')
-prediction_class_1 = Gauge('prediction_class_count_1', 'Số lượng user phân loại là 1')
+from monitoring.metric_server import (prediction_class_0, 
+                                      prediction_class_1, 
+                                      daily_crawled_count)
+
+
+load_dotenv()
+
 
 # DB Config
 DB_CONFIG = {
-    "host": "35.194.245.238",
-    "port": 5432,
-    "database": "mlops",
-    "user": "mintlee",
-    "password": "123456"
+    "host": os.getenv("DB_HOST"),
+    "port": os.getenv("DB_PORT"),
+    "database": os.getenv("DATABASE"),
+    "user": os.getenv("DB_USER"),
+    "password": os.getenv("DB_PW")
 }
 
 default_args = {
@@ -28,6 +34,7 @@ default_args = {
     'retries': 1,
     'retry_delay': dt.timedelta(minutes=1)
 }
+
 
 def crawl_data(**kwargs):
     today_str = dt.date.today().strftime('%Y-%m-%d')
@@ -42,6 +49,7 @@ def crawl_data(**kwargs):
 
     ingestor = PostgresDataIngestor(**DB_CONFIG)
     ingestor.ingest_data(table_name='bronze_data', data_source=df_today, mode='append')
+
 
 def transform_data():
     today_str = dt.date.today().strftime('%Y-%m-%d')
@@ -60,6 +68,7 @@ def transform_data():
 
     ingestor.ingest_data(table_name='silver_data', data_source=silver_df, mode='append')
     print("✅ Transform completed")
+
 
 def daily_prediction(**kwargs):
     today_str = dt.date.today().strftime('%Y-%m-%d')
@@ -97,6 +106,7 @@ def daily_prediction(**kwargs):
 
     unique, counts = np.unique(predictions, return_counts=True)
     count_dict = dict(zip(unique, counts))
+    print(count_dict)
     prediction_class_0.set(count_dict.get(0, 0))
     prediction_class_1.set(count_dict.get(1, 0))
 
@@ -108,7 +118,7 @@ def daily_prediction(**kwargs):
 
     ingestor.ingest_data(table_name='predictions', data_source=results, mode='append')
     print("✅ Predictions inserted")
-    
+
 
 with DAG(
     default_args=default_args,
